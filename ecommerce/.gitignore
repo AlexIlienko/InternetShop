@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=django
 
 ### Django .gitignore ###
+.idea/
 *.log
 *.pot
 *.pyc
@@ -12,4 +13,3 @@ db.sqlite3
 db.sqlite3-journal
 /media
 /static
-/.idea/
