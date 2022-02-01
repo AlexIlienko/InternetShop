@@ -11,8 +11,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
     def get_url(self):
         return reverse('products_by_category', args=[self.slug])
@@ -22,21 +22,21 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=250, unique=True)
+    name = models.CharField(max_length=250, unique=True, verbose_name='Товар' )
     slug = models.SlugField(max_length=250, unique=True)
-    description = models.TextField(blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=0)
-    image = models.ImageField(upload_to='product', blank=True)
-    stock = models.IntegerField()
-    available = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    description = models.TextField(blank=True , verbose_name='Описания')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория' )
+    price = models.DecimalField(max_digits=10, decimal_places=0 , verbose_name='Цена')
+    image = models.ImageField(upload_to='product', blank=True , verbose_name='Изображения')
+    stock = models.IntegerField( verbose_name='Количество')
+    available = models.BooleanField(default=True, verbose_name='Наличие')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
 
     class Meta:
-        ordering = ('name',)
-        verbose_name = 'product'
-        verbose_name_plural = 'products'
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
+        ordering = ['-created']
 
     def get_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
